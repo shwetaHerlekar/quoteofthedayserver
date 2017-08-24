@@ -26,13 +26,12 @@ public class MyWebhookServlet extends HttpServlet {
 	try
 	{
 	resp.setContentType("application/json");
-	
 	StringBuilder buffer = new StringBuilder();
-    BufferedReader reader = req.getReader();
-    String line;
-    while ((line = reader.readLine()) != null) {
-        buffer.append(line);
-    }
+    	BufferedReader reader = req.getReader();
+    	String line;
+    	while ((line = reader.readLine()) != null) {
+        	buffer.append(line);
+    	}
     String data = buffer.toString();
 	JSONParser parser = new JSONParser();
 	JSONObject reqJSON = (JSONObject)parser.parse(data);

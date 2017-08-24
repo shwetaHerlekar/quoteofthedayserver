@@ -39,6 +39,20 @@ public class MyWebhookServlet extends HttpServlet {
 	String action1 = String.valueOf(result.get("action"));
 	JSONObject parameters = (JSONObject)result.get("parameters");
 	
+	JSONObject res;
+	
+	switch (action1) {
+	case "query":
+		res = query(parameters);
+		break;
+	case "state_law":
+		res = state_law(parameters);
+		break;
+		
+	default:
+		break;
+	}
+	
 	PrintWriter out = resp.getWriter();
 	JSONObject obj = new JSONObject();
 	obj.put("speech", action1);
@@ -49,6 +63,21 @@ public class MyWebhookServlet extends HttpServlet {
 	catch(Exception e){
 	}
     
+  }
+  
+  public JSONObject query(JSONObject parameters){
+	  
+	  JSONObject result = new JSONObject();
+	  
+	  return result;
+  }
+  
+  public JSONObject state_law(JSONObject parameters) {
+	  
+	  JSONObject result = new JSONObject();
+	
+	  return parameters;
+	
   }
   
 }

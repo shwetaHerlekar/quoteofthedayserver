@@ -13,7 +13,9 @@ import ai.api.model.AIResponse;
 import ai.api.web.AIServiceServlet;
 
 import org.json.simple.*;
+import org.mortbay.log.Log;
 
+import sun.util.logging.resources.logging;
 
 
 // [START example]
@@ -35,6 +37,8 @@ public class MyServiceServlet extends AIServiceServlet {
 		JSONObject obj = new JSONObject();
 		obj.put("displayText", aiResponse.getResult().getFulfillment().getSpeech());
 		obj.put("speech", aiResponse.getResult().getFulfillment().getSpeech());
+		
+		Log.info(aiResponse.getResult().getFulfillment().getDisplayText());
 		
 		PrintWriter out = resp.getWriter();
 		out.print(obj);

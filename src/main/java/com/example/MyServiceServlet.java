@@ -33,16 +33,18 @@ public class MyServiceServlet extends AIServiceServlet {
 		resp.setContentType("application/json");
 		
 		JSONObject obj = new JSONObject();
+		String t = aiResponse.getResult().getFulfillment().getDisplayText();
 		obj.put("displayText", aiResponse.getResult().getFulfillment().getSpeech());
 		obj.put("speech", aiResponse.getResult().getFulfillment().getSpeech());
 		
-		log.info(aiResponse.getResult().getFulfillment().getDisplayText());
+		log.info(t);
 		PrintWriter out = resp.getWriter();
 		out.print(obj);
 	
-		if(aiResponse.getResult().getFulfillment().getDisplayText()!=null)
+		if(t!=null)
 		{
-			obj.put("displayText", aiResponse.getResult().getFulfillment().getDisplayText());
+			log.info("inside if");
+			obj.put("displayText",t);
 		}
 			
 		//resp.getWriter().append(aiResponse.getResult().getFulfillment().getSpeech());

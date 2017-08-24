@@ -23,7 +23,7 @@ $(function(){
 		$(".chatdiv").animate({ scrollTop: $('.chatdiv').prop("scrollHeight")}, 1000);
 		$("#message").val("");
 
-		$.post("/",data,function(res){
+		$.post("/ai",data,function(res){
 			console.log(res)
 			rotation()
 

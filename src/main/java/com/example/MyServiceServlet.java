@@ -40,7 +40,7 @@ public class MyServiceServlet extends AIServiceServlet {
 		PrintWriter out = resp.getWriter();
 		out.print(obj);
 	
-		if(!aiResponse.getResult().getFulfillment().getDisplayText().equals(null))
+		if(!aiResponse.getResult().getFulfillment().getDisplayText().equals("null"))
 		{
 			obj.put("displayText", aiResponse.getResult().getFulfillment().getDisplayText());
 		}

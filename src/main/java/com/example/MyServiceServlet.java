@@ -38,15 +38,16 @@ public class MyServiceServlet extends AIServiceServlet {
 		obj.put("speech", aiResponse.getResult().getFulfillment().getSpeech());
 		
 		log.info(t);
-		PrintWriter out = resp.getWriter();
-		out.print(obj);
-	
+		
 		if(t!=null)
 		{
-			log.info("inside if");
-			obj.put("displayText",t);
+			//log.info("inside if");
+			obj.put("displayText", t);
 		}
-			
+		
+		PrintWriter out = resp.getWriter();
+		out.print(obj);
+		
 		//resp.getWriter().append(aiResponse.getResult().getFulfillment().getSpeech());
 	}
 	

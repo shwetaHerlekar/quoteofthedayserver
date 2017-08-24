@@ -1,26 +1,24 @@
 package com.example;
 
 import java.io.*;
+import java.util.logging.Logger;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+
 
 import ai.api.AIServiceException;
 import ai.api.model.AIResponse;
 import ai.api.web.AIServiceServlet;
 
 import org.json.simple.*;
-import org.mortbay.log.Log;
-
-import sun.util.logging.resources.logging;
-
 
 // [START example]
 @SuppressWarnings("serial")
 public class MyServiceServlet extends AIServiceServlet {
+	
+	private static final Logger log = Logger.getLogger(MyServiceServlet.class.getName());
 
   @SuppressWarnings("unchecked")
 @Override
@@ -38,8 +36,7 @@ public class MyServiceServlet extends AIServiceServlet {
 		obj.put("displayText", aiResponse.getResult().getFulfillment().getSpeech());
 		obj.put("speech", aiResponse.getResult().getFulfillment().getSpeech());
 		
-		Log.info(aiResponse.getResult().getFulfillment().getDisplayText());
-		
+		log.info(aiResponse.getResult().getFulfillment().getDisplayText());
 		PrintWriter out = resp.getWriter();
 		out.print(obj);
 	

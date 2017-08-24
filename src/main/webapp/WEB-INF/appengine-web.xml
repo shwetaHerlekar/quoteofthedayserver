@@ -4,4 +4,7 @@
   <application>dummyproject-05042017</application>
   <version>beta-003</version>
   <threadsafe>true</threadsafe>
+  <system-properties>
+       <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
+    </system-properties>
 </appengine-web-app>

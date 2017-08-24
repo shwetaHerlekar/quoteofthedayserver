@@ -23,7 +23,7 @@ $(function(){
 		$(".chatdiv").animate({ scrollTop: $('.chatdiv').prop("scrollHeight")}, 1000);
 		$("#message").val("");
 
-		$.post("/",data,function(res){
+		$.post("https://ai-ml-eychat.appspot.com/",data,function(res){
 			console.log(res)
 			rotation()
 

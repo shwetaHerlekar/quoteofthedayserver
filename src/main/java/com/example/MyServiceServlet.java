@@ -19,7 +19,7 @@ import ai.api.web.AIServiceServlet;
 public class MyServiceServlet extends AIServiceServlet {
 
   @Override
-  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     
 	
 	String sessionId = req.getParameter("sessionId");

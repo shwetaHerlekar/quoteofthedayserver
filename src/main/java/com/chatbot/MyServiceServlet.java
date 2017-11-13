@@ -1,4 +1,4 @@
-package com.example;
+package com.chatbot;
 
 import java.io.*;
 import java.util.logging.Logger;

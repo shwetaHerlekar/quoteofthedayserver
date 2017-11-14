@@ -1,83 +1,41 @@
 package com.chatbot;
 
-import java.io.*;
+import java.util.HashMap;
+import java.util.logging.Logger;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.google.gson.JsonElement;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import ai.api.model.Fulfillment;
+import ai.api.web.AIWebhookServlet;
 
 // [START example]
 @SuppressWarnings("serial")
-public class MyWebhookServlet extends HttpServlet {
+public class MyWebhookServlet extends AIWebhookServlet {
+	private static final Logger log = Logger.getLogger(MyWebhookServlet.class.getName());
 
-  @Override
-  public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    PrintWriter out = resp.getWriter();
-    out.println("Hello, world");
-    
-  }
-
-  @Override
-  public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-    
-	try
-	{
-	resp.setContentType("application/json");
-	StringBuilder buffer = new StringBuilder();
-    	BufferedReader reader = req.getReader();
-    	String line;
-    	while ((line = reader.readLine()) != null) {
-        	buffer.append(line);
-    	}
-    String data = buffer.toString();
-	JSONParser parser = new JSONParser();
-	JSONObject reqJSON = (JSONObject)parser.parse(data);
-	JSONObject result = (JSONObject)reqJSON.get("result");
-	String action1 = String.valueOf(result.get("action"));
-	JSONObject parameters = (JSONObject)result.get("parameters");
-	
-	JSONObject res;
-	
-	switch (action1) {
-	case "query":
-		res = query(parameters);
-		break;
-	case "state_law":
-		res = state_law(parameters);
-		break;
+	@Override
+	protected void doWebhook(AIWebhookRequest input, Fulfillment output) {
 		
-	default:
-		break;
+		log.info("webhook call");
+		String action = input.getResult().getAction();
+		HashMap<String, JsonElement> parameter = input.getResult().getParameters();
+		try{
+			switch (action) {
+				case "query_leave" :
+					log.info("in action : query_leave"  );
+					output = queryLeave(output, parameter);
+					break;
+			}
+		}catch(Exception e){
+			
+		}
 	}
 	
-	PrintWriter out = resp.getWriter();
-	JSONObject obj = new JSONObject();
-	obj.put("speech", action1);
-	obj.put("displayText", action1);
-	out.println(obj);
-	
+	private Fulfillment queryLeave(Fulfillment output, HashMap<String, JsonElement> parameter){
+		String message = "Your birthday is coming up. Do you want to go out??";
+		output.setDisplayText(message);
+		output.setSpeech(message);
+		return output;
 	}
-	catch(Exception e){
-	}
-    
-  }
-  
-  public JSONObject query(JSONObject parameters){
-	  
-	  JSONObject result = new JSONObject();
-	  
-	  return result;
-  }
-  
-  public JSONObject state_law(JSONObject parameters) {
-	  
-	  JSONObject result = new JSONObject();
-	
-	  return parameters;
-	
-  }
-  
+
 }

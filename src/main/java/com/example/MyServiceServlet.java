@@ -32,11 +32,21 @@ public class MyServiceServlet extends HttpServlet {
 			throws ServletException, IOException {
 		log.info("inside get method");
 		resp.setContentType("application/json");
-		if(req.getParameter("EmpID")!=null)
-		{
+		
+		try{
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-			Filter p = new FilterPredicate("EmpID", FilterOperator.EQUAL, req.getParameter("EmpID"));
-			Query q = new Query("PersistentEmployees").setFilter(p);
+			Filter filter = null;
+			if(req.getParameter("EmpID")!=null)
+			{
+				 log.info("got employee id");
+				 filter = new FilterPredicate("EmpID", FilterOperator.EQUAL, req.getParameter("EmpID"));
+			}
+			if(req.getParameter("EmployeeName")!=null)
+			{
+				log.info("got employee name");
+				filter = new FilterPredicate("EmployeeName", FilterOperator.EQUAL, req.getParameter("EmployeeName"));
+			}
+			Query q = new Query("PersistentEmployees").setFilter(filter);
 			PreparedQuery pq = datastore.prepare(q);
 			Entity result = pq.asSingleEntity();
 			log.info(result.toString());
@@ -50,25 +60,9 @@ public class MyServiceServlet extends HttpServlet {
 			resObj.put("LastLeaveDate", result.getProperty("LastLeaveDate"));
 			resObj.put("LastLeaveReason", result.getProperty("LastLeaveReason"));
 			resp.getWriter().write(resObj.toJSONString());
-		}
-		if(req.getParameter("EmployeeName")!=null)
+		}catch(Exception e)
 		{
-			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-			Filter p = new FilterPredicate("EmployeeName", FilterOperator.EQUAL, req.getParameter("EmployeeName"));
-			Query q = new Query("PersistentEmployees").setFilter(p);
-			PreparedQuery pq = datastore.prepare(q);
-			Entity result = pq.asSingleEntity();
-			log.info(result.toString());
-			JSONObject resObj = new JSONObject();
-			resObj.put("EmpID", result.getProperty("EmpID"));
-			resObj.put("EmployeeName", result.getProperty("EmployeeName"));
-			resObj.put("Gender", result.getProperty("Gender"));
-			resObj.put("Extention", result.getProperty("Extention"));
-			resObj.put("DateOfBirth", result.getProperty("DateOfBirth"));
-			resObj.put("DateOfJoining", result.getProperty("DateOfJoining"));
-			resObj.put("LastLeaveDate", result.getProperty("LastLeaveDate"));
-			resObj.put("LastLeaveReason", result.getProperty("LastLeaveReason"));
-			resp.getWriter().write(resObj.toJSONString());
+			log.info("exception in getting employee"+e);
 		}
 		
 	}

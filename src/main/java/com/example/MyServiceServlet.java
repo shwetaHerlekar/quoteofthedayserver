@@ -27,13 +27,13 @@ public class MyServiceServlet extends HttpServlet {
 	
 	private static final Logger log = Logger.getLogger(MyServiceServlet.class.getName());
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		log.info("inside get method");
 		resp.setContentType("application/json");
-		
+		JSONObject resObj = new JSONObject();
 		try{
 			
 			//create datastore service object
@@ -60,20 +60,25 @@ public class MyServiceServlet extends HttpServlet {
 			Entity result = pq.asSingleEntity();
 			log.info(result.toString());
 			
-			//create json object
-			JSONObject resObj = new JSONObject();
-			resObj.put("EmpID", result.getProperty("EmpID"));
-			resObj.put("EmployeeName", result.getProperty("EmployeeName"));
-			resObj.put("BusinessUnit", result.getProperty("BusinessUnit"));
-			resObj.put("Gender", result.getProperty("Gender"));
-			resObj.put("Extention", result.getProperty("Extention"));
-			resObj.put("Mobile", result.getProperty("Mobile"));
-			resObj.put("Location", result.getProperty("Location"));
-			resObj.put("ManagerName", result.getProperty("ManagerName"));
-			resObj.put("DateOfBirth", result.getProperty("DateOfBirth"));
-			resObj.put("DateOfJoining", result.getProperty("DateOfJoining"));
-			resObj.put("LastLeaveDate", result.getProperty("LastLeaveDate"));
-			resObj.put("LastLeaveReason", result.getProperty("LastLeaveReason"));
+			if(result==null){
+				resObj.put("ERROR_MSG", Constants.ERROR_MSGS[1]);
+				resObj.put("error_code", Constants.ERROR_CODES[1]);
+			}else{
+				//create json object
+				
+				resObj.put("EmpID", result.getProperty("EmpID"));
+				resObj.put("EmployeeName", result.getProperty("EmployeeName"));
+				resObj.put("BusinessUnit", result.getProperty("BusinessUnit"));
+				resObj.put("Gender", result.getProperty("Gender"));
+				resObj.put("Extention", result.getProperty("Extention"));
+				resObj.put("Mobile", result.getProperty("Mobile"));
+				resObj.put("Location", result.getProperty("Location"));
+				resObj.put("ManagerName", result.getProperty("ManagerName"));
+				resObj.put("DateOfBirth", result.getProperty("DateOfBirth"));
+				resObj.put("DateOfJoining", result.getProperty("DateOfJoining"));
+				resObj.put("LastLeaveDate", result.getProperty("LastLeaveDate"));
+				resObj.put("LastLeaveReason", result.getProperty("LastLeaveReason"));
+			}
 			
 			//return the json
 			resp.getWriter().write(resObj.toJSONString());
@@ -81,6 +86,9 @@ public class MyServiceServlet extends HttpServlet {
 		}catch(Exception e)
 		{
 			log.info("exception in getting employee"+e);
+			resObj.put("ERROR_MSG", Constants.ERROR_MSGS[1]);
+			resObj.put("error_code", Constants.ERROR_CODES[1]);
+			resp.getWriter().write(resObj.toJSONString());
 		}
 		
 	}

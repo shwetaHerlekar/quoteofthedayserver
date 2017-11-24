@@ -1,6 +1,7 @@
 package com.example;
 
 import java.io.*;
+
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -34,8 +35,12 @@ public class MyServiceServlet extends HttpServlet {
 		resp.setContentType("application/json");
 		
 		try{
+			
+			//create datastore service object
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			Filter filter = null;
+			
+			//set the filter either EmpID or EmployeeName
 			if(req.getParameter("EmpID")!=null)
 			{
 				 log.info("got employee id");
@@ -46,20 +51,33 @@ public class MyServiceServlet extends HttpServlet {
 				log.info("got employee name");
 				filter = new FilterPredicate("EmployeeName", FilterOperator.EQUAL, req.getParameter("EmployeeName"));
 			}
+			
+			//prepare query
 			Query q = new Query("PersistentEmployees").setFilter(filter);
 			PreparedQuery pq = datastore.prepare(q);
+			
+			//fetch respective entity
 			Entity result = pq.asSingleEntity();
 			log.info(result.toString());
+			
+			//create json object
 			JSONObject resObj = new JSONObject();
 			resObj.put("EmpID", result.getProperty("EmpID"));
 			resObj.put("EmployeeName", result.getProperty("EmployeeName"));
+			resObj.put("BusinessUnit", result.getProperty("BusinessUnit"));
 			resObj.put("Gender", result.getProperty("Gender"));
 			resObj.put("Extention", result.getProperty("Extention"));
+			resObj.put("Mobile", result.getProperty("Mobile"));
+			resObj.put("Location", result.getProperty("Location"));
+			resObj.put("ManagerName", result.getProperty("ManagerName"));
 			resObj.put("DateOfBirth", result.getProperty("DateOfBirth"));
 			resObj.put("DateOfJoining", result.getProperty("DateOfJoining"));
 			resObj.put("LastLeaveDate", result.getProperty("LastLeaveDate"));
 			resObj.put("LastLeaveReason", result.getProperty("LastLeaveReason"));
+			
+			//return the json
 			resp.getWriter().write(resObj.toJSONString());
+			
 		}catch(Exception e)
 		{
 			log.info("exception in getting employee"+e);

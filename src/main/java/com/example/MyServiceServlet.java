@@ -53,7 +53,7 @@ public class MyServiceServlet extends HttpServlet {
 			}
 			
 			//prepare query
-			Query q = new Query("PersistentEmployees").setFilter(filter);
+			Query q = new Query("PersistentEmployee").setFilter(filter);
 			PreparedQuery pq = datastore.prepare(q);
 			
 			//fetch respective entity
@@ -78,6 +78,10 @@ public class MyServiceServlet extends HttpServlet {
 				resObj.put("DateOfJoining", result.getProperty("DateOfJoining"));
 				resObj.put("LastLeaveDate", result.getProperty("LastLeaveDate"));
 				resObj.put("LastLeaveReason", result.getProperty("LastLeaveReason"));
+				resObj.put("OptionalLeave", result.getProperty("OptionalLeave"));
+				resObj.put("OptionalHoliday", result.getProperty("OptionalHoliday"));
+				resObj.put("CompensatoryOff", result.getProperty("CompensatoryOff"));
+				resObj.put("PrivilegedLeave", result.getProperty("PrivilegedLeave"));
 			}
 			
 			//return the json

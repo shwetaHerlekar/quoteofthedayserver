@@ -53,7 +53,7 @@ public class MyServiceServlet extends HttpServlet {
 			}
 			
 			//prepare query
-			Query q = new Query("PersistentEmployee").setFilter(filter);
+			Query q = new Query("PersistentEmployees").setFilter(filter);
 			PreparedQuery pq = datastore.prepare(q);
 			
 			//fetch respective entity

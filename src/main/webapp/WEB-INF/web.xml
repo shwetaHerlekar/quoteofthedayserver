@@ -8,4 +8,14 @@
     <servlet-name>query1</servlet-name>
     <url-pattern>/getData</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HolidayServlet</display-name>
+    <servlet-name>HolidayServlet</servlet-name>
+    <servlet-class>com.example.HolidayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HolidayServlet</servlet-name>
+    <url-pattern>/getHolidayData</url-pattern>
+  </servlet-mapping>
 </web-app>

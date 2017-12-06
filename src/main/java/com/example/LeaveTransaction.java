@@ -75,6 +75,7 @@ public class LeaveTransaction extends HttpServlet {
 			String endDate = jsonResponseObject.get("endDate").toString();
 			String reason = jsonResponseObject.get("reason").toString();
 			String typeOfLeave = jsonResponseObject.get("typeOfLeave").toString();
+			log.info("type :"+typeOfLeave);
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			Entity leaveTransaction = new Entity("LeaveTransactions");

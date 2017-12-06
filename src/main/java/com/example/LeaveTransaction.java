@@ -53,17 +53,12 @@ public class LeaveTransaction extends HttpServlet {
 					resp.getWriter().write(responseObj.toJSONString());
 				}
 			}
-			else{
-				responseObj.put("error_code", Constants.ERROR_CODES[1]);
-				responseObj.put("ERROR_MSG", Constants.ERROR_MSGS[1]);
-				resp.getWriter().write(responseObj.toJSONString());
-			}
 		}catch(Exception e){
 			log.info("exception in applying leaves"+e);
-			responseObj.put("error_code", Constants.ERROR_CODES[1]);
-			responseObj.put("ERROR_MSG", Constants.ERROR_MSGS[1]);
-			resp.getWriter().write(responseObj.toJSONString());
 		}
+		responseObj.put("error_code", Constants.ERROR_CODES[1]);
+		responseObj.put("ERROR_MSG", Constants.ERROR_MSGS[1]);
+		resp.getWriter().write(responseObj.toJSONString());
 	}
 	
 	public int addLeaveTransaction(JSONObject jsonResponseObject) {

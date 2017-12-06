@@ -18,4 +18,14 @@
     <servlet-name>HolidayServlet</servlet-name>
     <url-pattern>/getHolidayData</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LeaveTransaction</display-name>
+    <servlet-name>LeaveTransaction</servlet-name>
+    <servlet-class>com.example.LeaveTransaction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LeaveTransaction</servlet-name>
+    <url-pattern>/applyLeave</url-pattern>
+  </servlet-mapping>
 </web-app>

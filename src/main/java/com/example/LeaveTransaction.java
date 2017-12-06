@@ -114,26 +114,30 @@ public class LeaveTransaction extends HttpServlet {
 			log.info(employee.toString());
 			
 			if(typeOfLeave.equals("PL")){
+				log.info("inside PL");
 				int leaves = Integer.parseInt(employee.getProperty("PrivilegedLeave").toString());
 				leaves = leaves - noOfDays;
 				employee.setProperty("PrivilegedLeave", leaves);
 			}
 			if(typeOfLeave.equals("OH")){
+				log.info("inside OH");
 				int leaves = Integer.parseInt(employee.getProperty("OptionalHoliday").toString());
 				leaves = leaves - noOfDays;
 				employee.setProperty("OptionalHoliday", leaves);
 			}
 			if(typeOfLeave.equals("OL")){
+				log.info("inside OL");
 				int leaves = Integer.parseInt(employee.getProperty("OptionalLeave").toString());
 				leaves = leaves - noOfDays;
 				employee.setProperty("OptionalLeave", leaves);
 			}
 			if(typeOfLeave.equals("CompOff")){
+				log.info("inside CompOff");
 				int leaves = Integer.parseInt(employee.getProperty("CompensatoryOff").toString());
 				leaves = leaves - noOfDays;
 				employee.setProperty("CompensatoryOff", leaves);
 			}
-			
+			log.info(employee.toString());
 			datastore.put(employee);
 			response = 1;
 		}catch(Exception e){

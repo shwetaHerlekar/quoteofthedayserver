@@ -133,7 +133,7 @@ public class LeaveTransaction extends HttpServlet {
 				leaves = leaves - noOfDays;
 				employee.setProperty("OptionalLeave", leaves);
 			}
-			if(typeOfLeave.equals("CompOff")){
+			if(typeOfLeave.equals("CF")){
 				log.info("inside CompOff");
 				int leaves = Integer.parseInt(employee.getProperty("CompensatoryOff").toString());
 				leaves = leaves - noOfDays;

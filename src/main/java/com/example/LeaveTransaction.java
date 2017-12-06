@@ -83,6 +83,7 @@ public class LeaveTransaction extends HttpServlet {
 			leaveTransaction.setProperty("EndDate", endDate);
 			leaveTransaction.setProperty("TypeOfLeave", typeOfLeave);
 			leaveTransaction.setProperty("Reason", reason);
+			log.info(leaveTransaction.toString());
 			datastore.put(leaveTransaction);
 			response = 1;
 		}catch(Exception e){

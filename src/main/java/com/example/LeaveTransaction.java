@@ -48,6 +48,7 @@ public class LeaveTransaction extends HttpServlet {
 				response = deductLeaves(jsonResponseObject);
 				if(response == 1)
 				{
+					log.info("leave applied and deducted");
 					responseObj.put("error_code", Constants.ERROR_CODES[0]);
 					responseObj.put("ERROR_MSG", Constants.ERROR_MSGS[0]);
 					resp.getWriter().write(responseObj.toJSONString());
@@ -106,7 +107,7 @@ public class LeaveTransaction extends HttpServlet {
 			
 			//fetch respective entity
 			Entity employee = pq.asSingleEntity();
-			log.info(employee.toString());
+			//log.info(employee.toString());
 			
 			if(typeOfLeave.equals("PL")){
 				log.info("inside PL");
@@ -132,7 +133,7 @@ public class LeaveTransaction extends HttpServlet {
 				leaves = leaves - noOfDays;
 				employee.setProperty("CompensatoryOff", leaves);
 			}
-			log.info(employee.toString());
+			//log.info(employee.toString());
 			datastore.put(employee);
 			response = 1;
 		}catch(Exception e){

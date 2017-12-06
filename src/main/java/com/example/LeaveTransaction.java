@@ -33,7 +33,7 @@ public class LeaveTransaction extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		JSONObject responseObj=null;
+		JSONObject responseObj=new JSONObject();
 		log.info("inside apply leave");
 		
 		try{

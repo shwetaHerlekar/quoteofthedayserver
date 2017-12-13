@@ -41,7 +41,7 @@ public class Test1 extends HttpServlet {
 		String toDate = "17-Dec-2017";
 		boolean isHalfDaySession = false;
 		
-		int leaves = getResponseFromLeaveDaysAPI(accessToken, fromDate, toDate, leaveTypeCid, isHalfDaySession, employeeHRISCid);
+		float leaves = getResponseFromLeaveDaysAPI(accessToken, fromDate, toDate, leaveTypeCid, isHalfDaySession, employeeHRISCid);
 		response.getWriter().write("Leave types, info and days api tested successfully");
 	}
 	
@@ -110,8 +110,8 @@ public class Test1 extends HttpServlet {
 		return leaveInfo;
 	}
 	
-	static int getResponseFromLeaveDaysAPI(String accessToken,String fromDate, String toDate, int leaveTypeCid, boolean isHalfDaySession, String employeeHRISCid){
-		int leaves = 0;
+	static float getResponseFromLeaveDaysAPI(String accessToken,String fromDate, String toDate, int leaveTypeCid, boolean isHalfDaySession, String employeeHRISCid){
+		float leaves = 0;
 		try{
 			log.info("inside getting response of api for leave days");
 			String apiurl = "https://api.persistent.com:9020/hr/leavedays/"+fromDate+"/"+toDate+"/"+leaveTypeCid+"/"+isHalfDaySession+"/"+employeeHRISCid;
@@ -131,7 +131,7 @@ public class Test1 extends HttpServlet {
 				output.append(op);
 			}
 			
-			leaves = Integer.parseInt(output.toString());
+			leaves = Float.parseFloat(output.toString());
 			conn.disconnect();
 			log.info("no of leaves applicable"+leaves);
 		}catch(Exception e){

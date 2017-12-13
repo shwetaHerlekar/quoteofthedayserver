@@ -58,8 +58,7 @@ public class Test extends HttpServlet {
     	
 		JSONObject responseObject = new JSONObject();
 		
-		String event_date= employeeDetails.get("DateOfBirth").toString();  
-		responseObject.put("birthday", event_date);
+		String event_date= null;
 		
 		JSONObject holidays = new JSONObject();
 		event_date="25/12/2017";  

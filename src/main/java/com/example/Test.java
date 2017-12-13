@@ -45,16 +45,16 @@ public class Test extends HttpServlet {
 		
 		JSONObject leave = (JSONObject)leaveTypes.get(0);
 		log.info(leave.toString());
-		int privillage_leave = Integer.parseInt(leave.get("AvailableLeaveCount").toString());
+		float privillage_leave = Float.parseFloat(leave.get("AvailableLeaveCount").toString());
 		
 		leave = (JSONObject)leaveTypes.get(1);
-		int ol = Integer.parseInt(leave.get("AvailableLeaveCount").toString());
+		float ol = Float.parseFloat(leave.get("AvailableLeaveCount").toString());
 		
 		leave = (JSONObject)leaveTypes.get(2);
-		int oh = Integer.parseInt(leave.get("AvailableLeaveCount").toString());
+		float oh = Float.parseFloat(leave.get("AvailableLeaveCount").toString());
 		
 		leave = (JSONObject)leaveTypes.get(3);
-		int cf = Integer.parseInt(leave.get("AvailableLeaveCount").toString());
+		float cf = Float.parseFloat(leave.get("AvailableLeaveCount").toString());
     	
 		JSONObject responseObject = new JSONObject();
 		

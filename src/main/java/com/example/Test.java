@@ -69,8 +69,8 @@ public class Test extends HttpServlet {
 		holidays.put(event_date, "new year eve");
 		
 		responseObject.put("holidays", holidays);
-		responseObject.put("optional_leave", oh);
-		responseObject.put("optional_holiday", ol);
+		responseObject.put("optional_leave", ol);
+		responseObject.put("optional_holiday", oh);
 		responseObject.put("compensatiory_off", cf);
 		responseObject.put("privillage_leave", privillage_leave);
 

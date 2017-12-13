@@ -81,7 +81,7 @@ public class Test1 extends HttpServlet {
 	static JSONArray getResponseFromLeaveInfoAPI(String accessToken,String userName, int leaveTypeCid){
 		JSONArray leaveInfo=null;
 		try{
-			log.info("inside getting response of api for leave balance");
+			log.info("inside getting response of api for leave info");
 			String apiurl = "https://api.persistent.com:9020/hr/leaveinfo/"+userName+"/"+leaveTypeCid;
 			URL url = new URL(apiurl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -113,8 +113,8 @@ public class Test1 extends HttpServlet {
 	static int getResponseFromLeaveDaysAPI(String accessToken,String fromDate, String toDate, int leaveTypeCid, boolean isHalfDaySession, String employeeHRISCid){
 		int leaves = 0;
 		try{
-			log.info("inside getting response of api for leave balance");
-			String apiurl = "https://api.persistent.com:9020/hr/leaveinfo/"+fromDate+"/"+toDate+"/"+leaveTypeCid+"/"+isHalfDaySession+"/"+employeeHRISCid;
+			log.info("inside getting response of api for leave days");
+			String apiurl = "https://api.persistent.com:9020/hr/leavedays/"+fromDate+"/"+toDate+"/"+leaveTypeCid+"/"+isHalfDaySession+"/"+employeeHRISCid;
 			URL url = new URL(apiurl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);

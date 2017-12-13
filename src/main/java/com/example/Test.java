@@ -28,7 +28,7 @@ public class Test extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		log.info("inside test get");
-		String accessToken = "60OrOwPAuvDhrGBjCy33qTuqzt1i";
+		String accessToken = "z7l0lL8vOU9epMTw1meQMAw8tyaX";
 		JSONObject responseData = getHolidays(accessToken);
 		response.getWriter().write(responseData.toJSONString());
 	}

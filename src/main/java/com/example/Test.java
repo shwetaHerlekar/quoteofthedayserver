@@ -41,18 +41,20 @@ public class Test extends HttpServlet {
 		JSONObject employeeDetails = getResponseFromAPI(accessToken);
 		
 		JSONArray leaveTypes = (JSONArray)employeeDetails.get("LeavesList");
+		log.info(leaveTypes.toString());
 		
 		JSONObject leave = (JSONObject)leaveTypes.get(0);
+		log.info(leave.toString());
 		int privillage_leave = Integer.parseInt(leave.get("Privileged Leave").toString());
 		
-		leave = (JSONObject)leaveTypes.get(1);
+		/*leave = (JSONObject)leaveTypes.get(1);
 		int ol = Integer.parseInt(leave.get("Optional Leave").toString());
 		
 		leave = (JSONObject)leaveTypes.get(2);
 		int oh = Integer.parseInt(leave.get("Optional Holiday").toString());
 		
 		leave = (JSONObject)leaveTypes.get(3);
-		int cf = Integer.parseInt(leave.get("Compensatory Off").toString());
+		int cf = Integer.parseInt(leave.get("Compensatory Off").toString());*/
     	
 		JSONObject responseObject = new JSONObject();
 		
@@ -67,9 +69,9 @@ public class Test extends HttpServlet {
 		holidays.put(event_date, "new year eve");
 		
 		responseObject.put("holidays", holidays);
-		responseObject.put("optional_leave", oh);
+		/*responseObject.put("optional_leave", oh);
 		responseObject.put("optional_holiday", ol);
-		responseObject.put("compensatiory_off", cf);
+		responseObject.put("compensatiory_off", cf);*/
 		responseObject.put("privillage_leave", privillage_leave);
 
 		log.info(responseObject.toString());

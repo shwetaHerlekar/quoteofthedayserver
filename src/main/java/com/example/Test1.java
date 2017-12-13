@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -38,7 +39,7 @@ public class Test1 extends HttpServlet {
 	static JSONObject getResponseFromLeaveTypeAPI(String accessToken,String userName){
 		JSONObject responseData=null;
 		try{
-			log.info("inside getting response of api for leave balance");
+			log.info("inside getting response of api for type");
 			String apiurl = "https://api.persistent.com:9020/hr/leavetypes/"+userName;
 			URL url = new URL(apiurl);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -57,9 +58,9 @@ public class Test1 extends HttpServlet {
 			}
 			
 			JSONParser parser = new JSONParser();
-			responseData = (JSONObject) parser.parse(output.toString());
+			JSONArray leaveTypes = (JSONArray) parser.parse(output.toString());
 			conn.disconnect();
-			log.info(responseData.toString());
+			log.info(leaveTypes.toString());
 		}catch(Exception e){
 			log.info("error accessing leave balance :"+e);
 		}
@@ -89,9 +90,9 @@ public class Test1 extends HttpServlet {
 			}
 			
 			JSONParser parser = new JSONParser();
-			responseData = (JSONObject) parser.parse(output.toString());
+			JSONArray leaveInfo= (JSONArray) parser.parse(output.toString());
 			conn.disconnect();
-			log.info(responseData.toString());
+			log.info(leaveInfo.toString());
 		}catch(Exception e){
 			log.info("error accessing leave balance :"+e);
 		}

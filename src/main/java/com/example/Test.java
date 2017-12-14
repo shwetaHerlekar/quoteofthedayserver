@@ -29,7 +29,7 @@ public class Test extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		log.info("inside test get");
-		String accessToken = "omWXb77W6HrQ78xOAJKJNTlTNEpH";
+		String accessToken = "bvzw1TNFYRflHgfjy35Aj0fPlPxZ";
 		JSONObject responseData = getHolidays(accessToken);
 		response.getWriter().write(responseData.toJSONString());
 	}
@@ -114,57 +114,6 @@ public class Test extends HttpServlet {
 			log.info("error accessing leave balance :" + e);
 		}
 
-		return responseData;
-	}
-
-	@SuppressWarnings("unchecked")
-	public static JSONObject applyLeave(String empName, int leaveTypeCid,
-			String fromDate, String toDate, boolean isHalfDaySession,
-			boolean isAfterNoon, int leaveYearCid, boolean isAdvancedLeave,
-			String approverID, String Reason, String accessToken) {
-		JSONObject responseData = null;
-		try {
-
-			JSONObject requestBody = new JSONObject();
-			requestBody.put("EmployeeUserName", empName);
-			requestBody.put("LeaveTypeCid", leaveTypeCid);
-			requestBody.put("FromDate", fromDate);
-			requestBody.put("ToDate", toDate);
-			requestBody.put("IsHalfDaySession", isHalfDaySession);
-			requestBody.put("IsAfterNoon", isAfterNoon);
-			requestBody.put("LeaveYearCid", leaveYearCid);
-			requestBody.put("IsAdvanceLeave", isAdvancedLeave);
-			requestBody.put("ApproverId", approverID);
-			requestBody.put("Reason", Reason);
-			log.info("raw post data :"+requestBody);
-			byte[] out = requestBody.toJSONString().getBytes(StandardCharsets.UTF_8);
-			
-			URL u = new URL("https://api.persistent.com:9020/hr/leave");
-			HttpURLConnection conn = (HttpURLConnection) u.openConnection();
-			conn.setDoOutput(true);
-			conn.setRequestMethod("POST");
-			conn.setRequestProperty( "Content-Type", "application/json" );
-			conn.setRequestProperty("Authorization", "Bearer " + accessToken);
-			conn.setRequestProperty( "Content-Length", String.valueOf(out.length));
-			OutputStream os = conn.getOutputStream();
-			os.write(out);
-			os.flush();
-			
-			BufferedReader bufferedReaderObject = new BufferedReader(new InputStreamReader((conn.getInputStream())));			
-			StringBuilder output = new StringBuilder();			
-			
-			String op;
-			while ((op = bufferedReaderObject.readLine()) != null) {
-				output.append(op);
-			}
-
-			JSONParser parser = new JSONParser();
-			responseData = (JSONObject) parser.parse(output.toString());
-			log.info("resposne from apply leave API:"+responseData);
-			conn.disconnect();
-		} catch (Exception e) {
-			log.info("exception in applying leave" + e);
-		}
 		return responseData;
 	}
 }

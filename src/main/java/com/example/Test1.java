@@ -29,7 +29,7 @@ public class Test1 extends HttpServlet {
 		// TODO Auto-generated method stub
 		log.info("inside get test1");
 		String userName = "shweta_herlekar";
-		String accessToken = "omWXb77W6HrQ78xOAJKJNTlTNEpH";
+		String accessToken = "bvzw1TNFYRflHgfjy35Aj0fPlPxZ";
 		JSONArray leaveTypes = getResponseFromLeaveTypeAPI(accessToken, userName);
 		JSONObject obj = (JSONObject) leaveTypes.get(7);
 		int leaveYearCid = Integer.parseInt(obj.get("key").toString());
@@ -160,7 +160,7 @@ public class Test1 extends HttpServlet {
 		return leaves;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "null" })
 	public static JSONObject applyLeave(String empName, int leaveTypeCid,
 			String fromDate, String toDate, boolean isHalfDaySession,
 			boolean isAfterNoon, int leaveYearCid, boolean isAdvancedLeave,
@@ -202,10 +202,11 @@ public class Test1 extends HttpServlet {
 			while ((op = bufferedReaderObject.readLine()) != null) {
 				output.append(op);
 			}
-
+			log.info("output of api :"+output);
 			JSONParser parser = new JSONParser();
 			log.info("parsing the output");
-			responseData = (JSONObject) parser.parse(output.toString());
+			//responseData = (JSONObject) parser.parse(output.toString());
+			responseData.put("output", output.toString());
 			log.info("resposne from apply leave API:"+responseData);
 			conn.disconnect();
 		} catch (Exception e) {

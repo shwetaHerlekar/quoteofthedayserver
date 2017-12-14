@@ -30,10 +30,11 @@ public class Test1 extends HttpServlet {
 		log.info("inside get test1");
 		String userName = "shweta_herlekar";
 		String accessToken = "bvzw1TNFYRflHgfjy35Aj0fPlPxZ";
+		
 		JSONArray leaveTypes = getResponseFromLeaveTypeAPI(accessToken, userName);
-		JSONObject obj = (JSONObject) leaveTypes.get(7);
+		JSONObject obj = (JSONObject) leaveTypes.get(6);
 		int leaveYearCid = Integer.parseInt(obj.get("key").toString());
-		obj = (JSONObject) leaveTypes.get(1);
+		obj = (JSONObject) leaveTypes.get(0);
 		int leaveTypeCid = Integer.parseInt(obj.get("key").toString());
 		
 		///leaveTypeCid need to be set based on leave type
@@ -205,8 +206,8 @@ public class Test1 extends HttpServlet {
 			log.info("output of api :"+output);
 			JSONParser parser = new JSONParser();
 			log.info("parsing the output");
-			//responseData = (JSONObject) parser.parse(output.toString());
-			responseData.put("output", output.toString());
+			responseData = (JSONObject) parser.parse(output.toString());
+			//responseData.put("output", output.toString());
 			log.info("resposne from apply leave API:"+responseData);
 			conn.disconnect();
 		} catch (Exception e) {

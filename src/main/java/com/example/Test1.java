@@ -49,7 +49,7 @@ public class Test1 extends HttpServlet {
 		
 		//setting parameters for leave days api
 		String fromDate = "15-Dec-2017";
-		String toDate = "17-Dec-2017";
+		String toDate = "15-Dec-2017";
 		boolean isHalfDaySession = false;
 		
 		float leaves = getResponseFromLeaveDaysAPI(accessToken, fromDate, toDate, leaveTypeCid, isHalfDaySession, employeeHRISCid);
@@ -188,7 +188,8 @@ public class Test1 extends HttpServlet {
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty( "Content-Type", "application/json" );
 			conn.setRequestProperty("Authorization", "Bearer " + accessToken);
-			conn.setRequestProperty( "Content-Length", String.valueOf(out.length));
+			//conn.setRequestProperty( "Content-Length", String.valueOf(out.length));
+			log.info("setting output stream");
 			OutputStream os = conn.getOutputStream();
 			os.write(out);
 			os.flush();
@@ -196,12 +197,14 @@ public class Test1 extends HttpServlet {
 			BufferedReader bufferedReaderObject = new BufferedReader(new InputStreamReader((conn.getInputStream())));			
 			StringBuilder output = new StringBuilder();			
 			
+			log.info("getting the output");
 			String op;
 			while ((op = bufferedReaderObject.readLine()) != null) {
 				output.append(op);
 			}
 
 			JSONParser parser = new JSONParser();
+			log.info("parsing the output");
 			responseData = (JSONObject) parser.parse(output.toString());
 			log.info("resposne from apply leave API:"+responseData);
 			conn.disconnect();

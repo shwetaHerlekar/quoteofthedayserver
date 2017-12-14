@@ -61,6 +61,7 @@ public class Test1 extends HttpServlet {
 		String Reason = "testing leave apply api";
 		
 		JSONObject res = applyLeave(empName, leaveTypeCid, fromDate, toDate, isHalfDaySession, isAfterNoon, leaveYearCid, isAdvancedLeave, approverID, Reason, accessToken);
+		response.getWriter().write(res.toJSONString());
 	}
 	
 	

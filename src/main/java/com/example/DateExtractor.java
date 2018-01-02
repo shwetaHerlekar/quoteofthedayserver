@@ -43,6 +43,7 @@ public class DateExtractor extends HttpServlet {
 			String imgText = performOCR(imgBase64);
 			
 			//extract date
+			log.info("here.......");
 			String extractedDate = getDate(imgText);
 			
 			if(extractedDate==null){
@@ -110,14 +111,14 @@ public class DateExtractor extends HttpServlet {
         try {
 				JSONObject body = new JSONObject(result.get("body"));
 				String bodytring=result.getString("body");
-		    	System.out.println(bodytring);
+		    	//System.out.println(bodytring);
 		    	JSONObject bodyObject=new JSONObject(bodytring);
 		    	JSONArray responsesArray=(JSONArray) bodyObject.getJSONArray("responses");
 		        JSONObject textAnnotaionsDict=responsesArray.getJSONObject(0);
 		        JSONArray textAnnotationArray=(JSONArray)textAnnotaionsDict.getJSONArray("textAnnotations");
 		        JSONObject firstObj=(JSONObject) textAnnotationArray.get(0);
 		        descriptionStr=firstObj.getString("description");
-		        System.out.println("Description-"+descriptionStr);
+		        //System.out.println("Description-"+descriptionStr);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

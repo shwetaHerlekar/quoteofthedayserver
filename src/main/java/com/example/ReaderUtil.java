@@ -30,17 +30,17 @@ public class ReaderUtil {
 				stringBuilder.append("");
 			}
 		} catch (IOException ex) {
-			System.out.println(("Error reading the request body..."));
+			//System.out.println(("Error reading the request body..."));
 		} finally {
 			if (bufferedReader != null) {
 				try {
 					bufferedReader.close();
 				} catch (IOException ex) {
-					System.out.println("Error closing bufferedReader...");
+					//System.out.println("Error closing bufferedReader...");
 				}
 			}
 		}
-		System.out.println(stringBuilder.toString());
+		//System.out.println(stringBuilder.toString());
 		return stringBuilder.toString();
 	}
 }

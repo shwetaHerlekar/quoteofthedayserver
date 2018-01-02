@@ -36,7 +36,7 @@ public class DateExtractor extends HttpServlet {
 			//load post parameter
 			String responseJson = ReaderUtil.readPostParameter(request);
 			JSONObject jsonResponseObject = new JSONObject(responseJson);
-			log.info(jsonResponseObject.toString());
+			//log.info(jsonResponseObject.toString());
 			
 			//Perform ocr on base64 image
 			String imgBase64 = jsonResponseObject.getString("imgBase64");

@@ -48,4 +48,14 @@
     <servlet-name>Test1</servlet-name>
     <url-pattern>/Test1</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DateExtractor</display-name>
+    <servlet-name>DateExtractor</servlet-name>
+    <servlet-class>com.example.DateExtractor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DateExtractor</servlet-name>
+    <url-pattern>/DateExtractor</url-pattern>
+  </servlet-mapping>
 </web-app>

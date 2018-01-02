@@ -31,10 +31,33 @@ public class Test1 extends HttpServlet {
 		String userName = "shweta_herlekar";
 		String accessToken = "bvzw1TNFYRflHgfjy35Aj0fPlPxZ";
 		
+		String val = "PL";
+		int index = -1;
+		switch (val) {
+		case "PL":
+				index = 0;
+			break;
+		case "OL":
+				index = 1;
+				break;
+		case "ML":
+				index = 2;
+				break;
+		case "CAL":
+				index = 3;
+				break;
+		case "OH":
+				index = 4;
+				break;
+		case "CF":
+				index = 5;
+				break;
+		}
+		
 		JSONArray leaveTypes = getResponseFromLeaveTypeAPI(accessToken, userName);
 		JSONObject obj = (JSONObject) leaveTypes.get(6);
 		int leaveYearCid = Integer.parseInt(obj.get("key").toString());
-		obj = (JSONObject) leaveTypes.get(0);
+		obj = (JSONObject) leaveTypes.get(index);
 		int leaveTypeCid = Integer.parseInt(obj.get("key").toString());
 		
 		///leaveTypeCid need to be set based on leave type

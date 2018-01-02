@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 /**
  * Servlet implementation class DateExtractor
@@ -36,10 +35,7 @@ public class DateExtractor extends HttpServlet {
 			
 			//load post parameter
 			String responseJson = ReaderUtil.readPostParameter(request);
-			JSONParser parser = new JSONParser();
-			JSONObject jsonResponseObject;
-			jsonResponseObject = (JSONObject) parser
-					.parse(responseJson);
+			JSONObject jsonResponseObject = new JSONObject(responseJson);
 			log.info(jsonResponseObject.toString());
 			
 			//Perform ocr on base64 image

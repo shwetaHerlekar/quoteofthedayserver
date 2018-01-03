@@ -47,7 +47,7 @@ public class DateExtractor extends HttpServlet {
 			log.info("ocr extracted text"+imgText);
 			String extractedDate = getDate(imgText);
 			
-			if(extractedDate==null){
+			if(extractedDate!=null){
 				responseObj.put("code", "200");
 				responseObj.put("msg", "Success");
 				responseObj.put("date", extractedDate);

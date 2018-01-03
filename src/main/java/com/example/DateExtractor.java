@@ -40,10 +40,11 @@ public class DateExtractor extends HttpServlet {
 			
 			//Perform ocr on base64 image
 			String imgBase64 = jsonResponseObject.getString("imgBase64");
+			log.info(imgBase64);
 			String imgText = performOCR(imgBase64);
 			
 			//extract date
-			log.info("here.......");
+			log.info("ocr extracted text"+imgText);
 			String extractedDate = getDate(imgText);
 			
 			if(extractedDate==null){
@@ -55,9 +56,11 @@ public class DateExtractor extends HttpServlet {
 				responseObj.put("code", "400");
 				responseObj.put("msg", "No date found");
 			}
+			log.info("response"+responseObj);
 		}catch(Exception e){
 			log.info("error extracting date"+e.getMessage());
 		}
+		response.getWriter().write(responseObj.toString());
 	}
 	
 	public static String performOCR(String base64String){

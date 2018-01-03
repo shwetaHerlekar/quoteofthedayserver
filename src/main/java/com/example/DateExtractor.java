@@ -135,11 +135,13 @@ public class DateExtractor extends HttpServlet {
     		 Pattern p = Pattern.compile(expr);   // the pattern to search for
     	     Matcher m = p.matcher(stringToSearch);
 
+    	     log.info("cur expr"+expr);
     	     // if we find a match, get the group 
     	     if (m.find())
     	     {
     	         // we're only looking for one group, so get it
     	    	 match = m.group();
+    	    	 log.info("match found"+match);
     	         break;
     	      }
     	  

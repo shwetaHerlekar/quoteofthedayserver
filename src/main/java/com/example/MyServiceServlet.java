@@ -30,11 +30,10 @@ public class MyServiceServlet extends HttpServlet {
 		//JSONObject resObj = new JSONObject();
 		try{
 			
-			log.info("inner inside\n");
-			
 			Date today = new Date();
-			
-			String quote = readQuote("quotes.txt",today.getDay());
+			int index = today.getDate();
+			log.info("index :"+index);
+			String quote = readQuote("quotes.txt",index);
 			resp.getWriter().write(quote);
 			
 		}catch(Exception e)
@@ -56,11 +55,11 @@ public class MyServiceServlet extends HttpServlet {
 
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
-				log.info(line);
 				quotes.add(line);
 			}
 
 			scanner.close();
+			log.info("quotes:"+quotes);
 
 		} catch (IOException e) {
 			log.info("exception in getting quotes"+e);

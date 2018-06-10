@@ -45,11 +45,12 @@ public class MyServiceServlet extends HttpServlet {
 		StringBuilder result = new StringBuilder("");
 		String quote = new String("");
 		//Get file from resources folder
-		InputStream input = getClass().getResourceAsStream(fileName);
-		log.info("////////"+String.valueOf(input));
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = new File(classLoader.getResource(fileName).getFile());
+		log.info("/////////"+file);
 		
-		/*Boolean isFirstLine = true;
-		try (Scanner scanner = new Scanner(input)) {
+		Boolean isFirstLine = true;
+		try (Scanner scanner = new Scanner(file)) {
 
 			while (scanner.hasNextLine()) {
 				if(isFirstLine){
@@ -70,7 +71,7 @@ public class MyServiceServlet extends HttpServlet {
 
 		} catch (IOException e) {
 			log.info("exception in getting quotes"+e);
-		}*/
+		}
 			
 		return quote;
 

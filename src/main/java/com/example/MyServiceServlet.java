@@ -1,6 +1,8 @@
 package com.example;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -30,7 +32,9 @@ public class MyServiceServlet extends HttpServlet {
 			
 			log.info("inner inside\n");
 			
-			String quote = readFile("quotes.txt");
+			Date today = new Date();
+			
+			String quote = readQuote("quotes.txt",today.getDay());
 			resp.getWriter().write(quote);
 			
 		}catch(Exception e)
@@ -40,54 +44,29 @@ public class MyServiceServlet extends HttpServlet {
 		
 	}
 	
-	public String readFile(String fileName){
-		log.info("bdjkbsjdkndlsvnldsvvdlkvmls");
-		StringBuilder result = new StringBuilder("");
-		String quote = new String("");
+	public String readQuote(String fileName,int index){
+		
+		ArrayList<String> quotes = new ArrayList<>(); 
 		//Get file from resources folder
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource(fileName).getFile());
-		log.info("/////////"+file);
 		
-		Boolean isFirstLine = true;
+		
 		try (Scanner scanner = new Scanner(file)) {
 
 			while (scanner.hasNextLine()) {
-				if(isFirstLine){
-					quote = scanner.nextLine();
-					log.info(quote);
-					isFirstLine = false;
-				}
-				else{
-					String line = scanner.nextLine();
-					log.info(line);
-					result.append(line).append("\n");
-				}
+				String line = scanner.nextLine();
+				log.info(line);
+				quotes.add(line);
 			}
 
 			scanner.close();
-			result.append(quote).append("\n");
-			writeToFile(fileName, result.toString());
 
 		} catch (IOException e) {
 			log.info("exception in getting quotes"+e);
 		}
 			
-		return quote;
-
-	  }
-	
-	public void writeToFile(String fileName,String data){
-		log.info("dataaaaa:"+data);
-		ClassLoader classLoader = getClass().getClassLoader();
-		File file = new File(classLoader.getResource(fileName).getFile());
-		try {
-			FileWriter fr = new FileWriter(file);
-			BufferedWriter br = new BufferedWriter(fr);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			log.info("exception in getting quotes"+e);
-		}
+		return quotes.get(index);
 	}
 	
 }

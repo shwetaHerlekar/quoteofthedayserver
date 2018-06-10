@@ -28,17 +28,20 @@ public class MyServiceServlet extends HttpServlet {
 		//JSONObject resObj = new JSONObject();
 		try{
 			
+			log.info("inner inside\n");
+			
 			String quote = readFile("quotes.txt");
 			resp.getWriter().write(quote);
 			
 		}catch(Exception e)
 		{
-			log.info("exception in getting employee"+e);
+			log.info("exception in getting quotes"+e);
 		}
 		
 	}
 	
 	public String readFile(String fileName){
+		log.info("bdjkbsjdkndlsvnldsvvdlkvmls");
 		StringBuilder result = new StringBuilder("");
 		String quote = new String("");
 		//Get file from resources folder
@@ -51,10 +54,12 @@ public class MyServiceServlet extends HttpServlet {
 			while (scanner.hasNextLine()) {
 				if(isFirstLine){
 					quote = scanner.nextLine();
+					log.info(quote);
 					isFirstLine = false;
 				}
 				else{
 					String line = scanner.nextLine();
+					log.info(line);
 					result.append(line).append("\n");
 				}
 			}
@@ -64,7 +69,7 @@ public class MyServiceServlet extends HttpServlet {
 			writeToFile(fileName, result.toString());
 
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.info("exception in getting quotes"+e);
 		}
 			
 		return quote;
@@ -80,7 +85,7 @@ public class MyServiceServlet extends HttpServlet {
 			BufferedWriter br = new BufferedWriter(fr);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("exception in getting quotes"+e);
 		}
 	}
 	

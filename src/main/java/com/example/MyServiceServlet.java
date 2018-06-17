@@ -39,9 +39,11 @@ public class MyServiceServlet extends HttpServlet {
 			Date today = new Date();
 			String root = "https://storage.googleapis.com/data-quoteapp/back";
 			int index = today.getDate();
+			log.info("index date..."+index);
 			int[] imagecnts = new int[]{1,2};
 			log.info("index :"+index);
 			int imgcnt = index % 2;
+			log.info("image cnt"+imgcnt);
 			JSONObject obj = new JSONObject();
 			String quote = readQuote(index%10);
 			obj.put("quote", quote);

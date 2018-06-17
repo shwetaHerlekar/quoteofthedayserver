@@ -33,17 +33,8 @@ public class MyServiceServlet extends HttpServlet {
 		try{
 			
 			log.info("using cron job..........................");
-			
-			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-			
-			final Query q = new Query("quotes");
-			PreparedQuery pq = datastore.prepare(q);
-			List<Entity> posts = pq.asList(FetchOptions.Builder.withLimit(31));
-			
-			for (Entity entity : posts) {
-				log.info(""+entity.getProperty("text"));
-			}
 
+			log.info(readQuote(2));
 			
 			resp.getWriter().write("cron job");
 			
@@ -54,9 +45,17 @@ public class MyServiceServlet extends HttpServlet {
 		
 	}
 	
-	public void readQuote(){
+	public String readQuote(int index){
 		
 		log.info("inside readquote");
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		
+		final Query q = new Query("quotes");
+		PreparedQuery pq = datastore.prepare(q);
+		List<Entity> posts = pq.asList(FetchOptions.Builder.withLimit(31));
+		
+		return String.valueOf(posts.get(index).getProperty("text"));
+		
 	}
 	
 	

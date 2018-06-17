@@ -2,7 +2,9 @@ package com.example;
 
 import java.io.*;
 import java.util.List;
+import java.util.Date;
 import java.util.logging.Logger;
+import org.json.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,10 +35,19 @@ public class MyServiceServlet extends HttpServlet {
 		try{
 			
 			log.info("using cron job..........................");
-
-			log.info(readQuote(2));
-			
-			resp.getWriter().write("cron job");
+		
+			Date today = new Date();
+			String root = "https://storage.googleapis.com/data-quoteapp/back";
+			int index = today.getDate();
+			int[] imagecnts = new int[]{1,2};
+			log.info("index :"+index);
+			int imgcnt = index % 2;
+			JSONObject obj = new JSONObject();
+			String quote = readQuote(index%10);
+			obj.put("quote", quote);
+			obj.put("image_url", root+imgcnt+".jpg");
+			log.info("final json"+obj.toString());
+			resp.getWriter().write(obj.toString());
 			
 		}catch(Exception e)
 		{

@@ -47,7 +47,7 @@ public class MyServiceServlet extends HttpServlet {
 			JSONObject obj = new JSONObject();
 			String quote = readQuote(index%10);
 			obj.put("quote", quote);
-			obj.put("image_url", root+imgcnt+".jpg");
+			obj.put("image_url", root+imagecnts[imgcnt]+".jpg");
 			log.info("final json"+obj.toString());
 			resp.getWriter().write(obj.toString());
 			

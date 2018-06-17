@@ -30,17 +30,8 @@ public class MyServiceServlet extends HttpServlet {
 		//JSONObject resObj = new JSONObject();
 		try{
 			
-			Date today = new Date();
-			String root = "https://storage.googleapis.com/data-quoteapp/back";
-			int index = today.getDate();
-			int[] imagecnts = new int[]{1,2};
-			log.info("index :"+index);
-			int imgcnt = index % 2;
-			JSONObject obj = new JSONObject();
-			String quote = readQuote("quotes.txt",index);
-			obj.put("quote", quote);
-			obj.put("image_url", root+imgcnt+".jpg");
-			resp.getWriter().write(obj.toJSONString());
+			log.info("using cron job..........................");
+			resp.getWriter().write("cron job");
 			
 		}catch(Exception e)
 		{
@@ -49,29 +40,9 @@ public class MyServiceServlet extends HttpServlet {
 		
 	}
 	
-	public String readQuote(String fileName,int index){
+	public void readQuote(){
 		
-		ArrayList<String> quotes = new ArrayList<>(); 
-		//Get file from resources folder
-		ClassLoader classLoader = getClass().getClassLoader();
-		File file = new File(classLoader.getResource(fileName).getFile());
-		
-		
-		try (Scanner scanner = new Scanner(file)) {
-
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				quotes.add(line);
-			}
-
-			scanner.close();
-			log.info("quotes:"+quotes);
-
-		} catch (IOException e) {
-			log.info("exception in getting quotes"+e);
-		}
-			
-		return quotes.get(index-1);
+		log.info("inside readquote");
 	}
 	
 }

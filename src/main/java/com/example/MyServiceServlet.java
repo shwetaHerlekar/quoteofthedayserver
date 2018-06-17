@@ -4,7 +4,12 @@ import java.io.*;
 import java.util.List;
 import java.util.Date;
 import java.util.logging.Logger;
+
 import org.json.*;
+
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.HttpURLConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -49,6 +54,7 @@ public class MyServiceServlet extends HttpServlet {
 			obj.put("quote", quote);
 			obj.put("image_url", root+imagecnts[imgcnt]+".jpg");
 			log.info("final json"+obj.toString());
+			pushNotification(quote, root+imagecnts[imgcnt]);
 			resp.getWriter().write(obj.toString());
 			
 		}catch(Exception e)
@@ -69,6 +75,40 @@ public class MyServiceServlet extends HttpServlet {
 		
 		return String.valueOf(posts.get(index).getProperty("text"));
 		
+	}
+	
+	public void pushNotification(String msg, String link){
+		String authKey = "AAAA07PX7_8:APA91bHFK63ZCC9B7OIYQ-hwY4vvKUgsJtNYI_CbIB8m_xV8XLbsNwAwl31Fy18xQJ6rnkIKTK_-N2ukgvlae0QWPWsW7mJvWC63G3eupb6vRHuQwScF3cVqGQRyzmGzvV1bHK-Nv2JK";   // You FCM AUTH key
+	    String FMCurl = "https://fcm.googleapis.com/v1/projects/profound-media-206806/messages";
+
+
+	    try {
+	    	URL url = new URL(FMCurl);
+		    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+		    conn.setUseCaches(false);
+		    conn.setDoInput(true);
+		    conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization","key="+authKey);
+		    conn.setRequestProperty("Content-Type","application/json");
+
+		    JSONObject json = new JSONObject();
+		    json.put("to","/topics/quotes");
+		    JSONObject data = new JSONObject();
+		    data.put("message",msg);
+		    data.put("url", link);
+		    json.put("data", data);
+
+		    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+		    wr.write(json.toString());
+		    wr.flush();
+		    conn.getInputStream();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
 	}
 	
 	

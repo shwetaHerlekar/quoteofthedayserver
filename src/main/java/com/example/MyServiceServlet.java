@@ -79,7 +79,7 @@ public class MyServiceServlet extends HttpServlet {
 	
 	public void pushNotification(String msg, String link){
 		String authKey = "AAAA07PX7_8:APA91bHFK63ZCC9B7OIYQ-hwY4vvKUgsJtNYI_CbIB8m_xV8XLbsNwAwl31Fy18xQJ6rnkIKTK_-N2ukgvlae0QWPWsW7mJvWC63G3eupb6vRHuQwScF3cVqGQRyzmGzvV1bHK-Nv2JK";   // You FCM AUTH key
-	    String FMCurl = "https://fcm.googleapis.com/v1/projects/profound-media-206806/messages";
+	    String FMCurl = "https://fcm.googleapis.com/fcm/send";
 
 
 	    try {
@@ -95,6 +95,9 @@ public class MyServiceServlet extends HttpServlet {
 
 		    JSONObject json = new JSONObject();
 		    json.put("to","/topics/quotes");
+		    JSONObject notfn = new JSONObject();
+		    notfn.put("title","Quote Of The Day");
+		    json.put("notification", notfn);
 		    JSONObject data = new JSONObject();
 		    data.put("message",msg);
 		    data.put("url", link);
@@ -103,10 +106,24 @@ public class MyServiceServlet extends HttpServlet {
 		    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 		    wr.write(json.toString());
 		    wr.flush();
-		    conn.getInputStream();
+		    wr.close();
+		    
+		    int responseCode = conn.getResponseCode();
+		    log.info("responsecode :"+responseCode);
+		    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		    String inputLine;
+		    StringBuffer response = new StringBuffer();
+		    
+		    while((inputLine = in.readLine())!=null){
+		    	response.append(inputLine);
+		    }
+		    in.close();
+		    log.info("response:"+response);
+		    
+		    
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("exception in pushing quote"+e);
 		}
 	    
 	}

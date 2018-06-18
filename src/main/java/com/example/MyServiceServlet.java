@@ -54,7 +54,7 @@ public class MyServiceServlet extends HttpServlet {
 			obj.put("quote", quote);
 			obj.put("image_url", root+imagecnts[imgcnt]+".jpg");
 			log.info("final json"+obj.toString());
-			pushNotification(quote, root+imagecnts[imgcnt]);
+			pushNotification(quote, root+imagecnts[imgcnt]+".jpg");
 			resp.getWriter().write(obj.toString());
 			
 		}catch(Exception e)

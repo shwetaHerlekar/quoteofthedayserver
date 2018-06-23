@@ -41,11 +41,12 @@ public class MyServiceServlet extends HttpServlet {
 			
 			log.info("using cron job..........................");
 		
+			int random = (int )(Math.random() * 50 + 1);
 			Date today = new Date();
 			String root = "https://storage.googleapis.com/data-quoteapp/back";
 			int index = today.getDate();
 			log.info("index date..."+index);
-			int[] imagecnts = new int[]{1,2};
+			int[] imagecnts = new int[]{1,2,3,4,5,6,7,8};
 			log.info("index :"+index);
 			int imgcnt = index % 2;
 			log.info("image cnt"+imgcnt);
@@ -54,7 +55,7 @@ public class MyServiceServlet extends HttpServlet {
 			obj.put("quote", quote);
 			obj.put("image_url", root+imagecnts[imgcnt]+".jpg");
 			log.info("final json"+obj.toString());
-			pushNotification(quote, root+imagecnts[imgcnt]+".jpg");
+			pushNotification(quote, root+imagecnts[imgcnt]+".jpg?avoidCache="+random);
 			resp.getWriter().write(obj.toString());
 			
 		}catch(Exception e)

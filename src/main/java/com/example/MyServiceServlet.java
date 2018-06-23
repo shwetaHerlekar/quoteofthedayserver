@@ -96,9 +96,9 @@ public class MyServiceServlet extends HttpServlet {
 
 		    JSONObject json = new JSONObject();
 		    json.put("to","/topics/quotes");
-		    JSONObject notfn = new JSONObject();
-		    notfn.put("title","Quote Of The Day");
-		    json.put("notification", notfn);
+		    //JSONObject notfn = new JSONObject();
+		    //notfn.put("title","Quote Of The Day");
+		    //json.put("notification", notfn);
 		    JSONObject data = new JSONObject();
 		    data.put("message",msg);
 		    data.put("url", link);

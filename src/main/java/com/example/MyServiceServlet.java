@@ -101,6 +101,8 @@ public class MyServiceServlet extends HttpServlet {
 		    JSONObject data = new JSONObject();
 		    data.put("message",msg);
 		    data.put("url", link);
+		    data.put("forceStart", "1");
+		    json.put("click_action", ".QuoteActivity");
 		    json.put("data", data);
 
 		    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());

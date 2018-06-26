@@ -44,11 +44,12 @@ public class MyServiceServlet extends HttpServlet {
 			int random = (int )(Math.random() * 50 + 1);
 			Date today = new Date();
 			String root = "https://storage.googleapis.com/data-quoteapp/back";
-			int index = today.getDate();
+			//int index = today.getDate();
+			int index = random;
 			log.info("index date..."+index);
 			int[] imagecnts = new int[]{1,2,3,4,5,6,7,8};
 			log.info("index :"+index);
-			int imgcnt = index % 2;
+			int imgcnt = index % 8;
 			log.info("image cnt"+imgcnt);
 			JSONObject obj = new JSONObject();
 			String quote = readQuote(index%10);
